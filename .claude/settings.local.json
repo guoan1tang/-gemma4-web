@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(kill 91054:*)",
+      "Bash(kill 1142:*)",
+      "Bash(claude:*)",
+      "Bash(env:*)",
+      "Bash(timeout 10 claude:*)",
+      "Bash(gtimeout 10:*)",
+      "Bash(/Users/duliday/.claude/plugins/cache/superpowers-marketplace/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh:*)",
+      "Bash(npm start:*)",
+      "Bash(PORT=3001 node:*)"
+    ]
+  }
+}

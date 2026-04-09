@@ -1,0 +1,65 @@
+<h2>Which chat interface layout works best?</h2>
+<p class="subtitle">Consider how model loading status, streaming output, and model switching fit together</p>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Classic Chat</h3>
+      <p>Full-width conversation with a top bar showing model status (loading/ready) and a settings dropdown for switching models. Clean, familiar pattern.</p>
+      <div class="mockup">
+        <div class="mockup-header" style="background:#1a1a2e;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;color:#a0a0b0;font-size:12px;">
+          <span>💬 Gemma Web</span>
+          <span style="background:#2d5016;color:#a6e3a1;padding:2px 8px;border-radius:10px;">● 4B Ready</span>
+        </div>
+        <div style="padding:16px;background:#0f0f1a;min-height:200px;">
+          <div style="background:#1e1e3a;padding:10px 14px;border-radius:12px 12px 12px 2px;max-width:80%;margin-bottom:12px;color:#c0c0d0;">Hello! I'm running locally on your device via WebGPU.</div>
+          <div style="background:#2a2a4a;padding:10px 14px;border-radius:12px 12px 2px 12px;max-width:80%;margin-left:auto;margin-bottom:12px;color:#e0e0f0;">Hi! What can you help me with?</div>
+        </div>
+        <div style="padding:12px;background:#1a1a2e;border-top:1px solid #2a2a4a;">
+          <div style="background:#2a2a4a;border-radius:8px;padding:8px 12px;color:#606070;">Type a message...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Split Panel</h3>
+      <p>Left sidebar with model controls (load/unload, switch model, GPU status). Right side is the chat area. More technical, good for power users.</p>
+      <div class="mockup">
+        <div style="display:flex;min-height:200px;background:#0f0f1a;">
+          <div style="width:140px;background:#1a1a2e;border-right:1px solid #2a2a4a;padding:12px;font-size:11px;color:#808090;">
+            <div style="color:#a6e3a1;margin-bottom:12px;">● Connected</div>
+            <div style="margin-bottom:8px;"><strong style="color:#c0c0d0;">Model</strong></div>
+            <div style="background:#2a2a4a;padding:4px 8px;border-radius:4px;margin-bottom:8px;">Gemma 4B</div>
+            <div style="margin-bottom:8px;"><strong style="color:#c0c0d0;">GPU Mem</strong></div>
+            <div style="background:#2a2a4a;padding:4px 8px;border-radius:4px;margin-bottom:8px;">2.1 / 8 GB</div>
+            <div style="margin-bottom:8px;"><strong style="color:#c0c0d0;">Tokens/s</strong></div>
+            <div style="background:#2a2a4a;padding:4px 8px;border-radius:4px;">~45 tok/s</div>
+          </div>
+          <div style="flex:1;padding:16px;">
+            <div style="background:#1e1e3a;padding:10px 14px;border-radius:12px 12px 12px 2px;max-width:80%;margin-bottom:12px;color:#c0c0d0;">Hello! I'm running locally on your device via WebGPU.</div>
+            <div style="background:#2a2a4a;padding:10px 14px;border-radius:12px 12px 2px 12px;max-width:80%;margin-left:auto;margin-bottom:12px;color:#e0e0f0;">Hi! What can you help me with?</div>
+            <div style="background:#2a2a4a;border-radius:8px;padding:8px 12px;color:#606070;">Type a message...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Minimal + Overlay</h3>
+      <p>Clean chat with no visible chrome. Model status is a small indicator at the bottom. Settings slide in as an overlay when needed. Focuses entirely on the conversation.</p>
+      <div class="mockup">
+        <div style="padding:16px;background:#0f0f1a;min-height:200px;position:relative;">
+          <div style="background:#1e1e3a;padding:10px 14px;border-radius:12px 12px 12px 2px;max-width:80%;margin-bottom:12px;color:#c0c0d0;">Hello! I'm running locally on your device via WebGPU.</div>
+          <div style="background:#2a2a4a;padding:10px 14px;border-radius:12px 12px 2px 12px;max-width:80%;margin-left:auto;margin-bottom:12px;color:#e0e0f0;">Hi! What can you help me with?</div>
+          <div style="background:#2a2a4a;border-radius:8px;padding:8px 12px;color:#606070;">Type a message...</div>
+          <div style="position:absolute;bottom:4px;right:12px;font-size:10px;color:#505060;">● 4B | 45 tok/s ⚙</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
