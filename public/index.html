@@ -253,11 +253,55 @@
     /* Chat Panel Header (mobile only) */
     #chat-header {
       display: none;
-      padding: 12px 16px;
+      padding: 10px 16px;
       background: #181825;
       border-bottom: 1px solid #313244;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
+    }
+    #chat-header .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+    #header-status {
+      font-size: 11px;
+      color: #6c7086;
+      white-space: nowrap;
+    }
+    #header-status.ready { color: #a6e3a1; }
+    #header-status.loading { color: #f9e2af; }
+    #header-status.error { color: #f38ba8; }
+    #header-status.idle { color: #6c7086; }
+
+    /* Mobile progress bar */
+    #mobile-progress {
+      display: none;
+      padding: 8px 16px;
+      background: #181825;
+      border-bottom: 1px solid #313244;
+    }
+    #mobile-progress.active { display: block; }
+    #mobile-progress .mp-bar {
+      width: 100%;
+      height: 6px;
+      background: #313244;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    #mobile-progress .mp-fill {
+      height: 100%;
+      background: #89b4fa;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    #mobile-progress .mp-text {
+      font-size: 11px;
+      color: #6c7086;
+      margin-top: 4px;
     }
     #chat-header .header-title {
       flex: 1;
@@ -376,7 +420,14 @@
   <div id="chat-panel">
     <div id="chat-header">
       <button id="sidebar-toggle-btn" aria-label="Toggle sidebar">&#9776;</button>
-      <span class="header-title">Gemma</span>
+      <div class="header-left">
+        <span class="header-title">Gemma</span>
+        <span id="header-status">初始化中...</span>
+      </div>
+    </div>
+    <div id="mobile-progress">
+      <div class="mp-bar"><div class="mp-fill" id="mp-fill"></div></div>
+      <div class="mp-text" id="mp-text"></div>
     </div>
     <div id="webgpu-warning">Your browser does not support WebGPU. Please use Chrome 113+ or Edge 113+.</div>
     <div id="chat-messages"></div>

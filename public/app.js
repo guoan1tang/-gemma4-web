@@ -56,6 +56,10 @@ const newConvBtn = document.getElementById('new-conv-btn');
 const webgpuWarning = document.getElementById('webgpu-warning');
 const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
 const sidebarOverlay = document.getElementById('sidebar-overlay');
+const headerStatusEl = document.getElementById('header-status');
+const mobileProgress = document.getElementById('mobile-progress');
+const mpFill = document.getElementById('mp-fill');
+const mpText = document.getElementById('mp-text');
 
 // State
 let engine = null;
@@ -68,6 +72,10 @@ let metricsInterval = null;
 async function init() {
   if (!navigator.gpu) {
     webgpuWarning.classList.add('active');
+    if (headerStatusEl) {
+      headerStatusEl.className = 'error';
+      headerStatusEl.textContent = 'WebGPU 不可用';
+    }
     setStatus('error', 'WebGPU not supported');
     return;
   }
@@ -146,20 +154,26 @@ async function loadModel() {
   setStatus('loading', 'Loading model...');
   setLoadingVisible(true);
   progressBarContainer.classList.add('active');
+  mobileProgress.classList.add('active');
   progressBarFill.style.width = '0%';
+  mpFill.style.width = '0%';
   progressText.textContent = 'Downloading...';
+  mpText.textContent = 'Downloading...';
 
   try {
     engine = await CreateMLCEngine(modelId, {
       initProgressCallback: (report) => {
         const pct = Math.round(report.progress * 100);
         progressBarFill.style.width = `${pct}%`;
+        mpFill.style.width = `${pct}%`;
         progressText.textContent = `${pct}% — ${report.text}`;
+        mpText.textContent = `${pct}% — ${report.text}`;
       },
     });
 
     setLoadingVisible(false);
     progressBarContainer.classList.remove('active');
+    mobileProgress.classList.remove('active');
     setStatus('ready', `Model ready: ${modelConfig.label}`);
     setInputEnabled(true);
     unloadBtn.style.display = 'block';
@@ -167,6 +181,7 @@ async function loadModel() {
   } catch (err) {
     setLoadingVisible(false);
     progressBarContainer.classList.remove('active');
+    mobileProgress.classList.remove('active');
     setStatus('error', 'Model load failed');
     appendError(`Failed to load model: ${err.message}`);
     // Show retry button
@@ -280,6 +295,10 @@ async function onStopGeneration() {
 function setStatus(state, text) {
   statusEl.className = `status-indicator ${state}`;
   statusEl.textContent = text;
+  if (headerStatusEl) {
+    headerStatusEl.className = state;
+    headerStatusEl.textContent = text;
+  }
 }
 
 function startMetricsPolling() {
