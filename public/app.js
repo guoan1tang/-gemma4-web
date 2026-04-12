@@ -161,7 +161,7 @@ async function loadModel() {
   mpText.textContent = 'Downloading...';
 
   try {
-    engine = await CreateMLCEngine(modelId, {
+    const loadPromise = CreateMLCEngine(modelId, {
       initProgressCallback: (report) => {
         const pct = Math.round(report.progress * 100);
         progressBarFill.style.width = `${pct}%`;
@@ -170,6 +170,13 @@ async function loadModel() {
         mpText.textContent = `${pct}% — ${report.text}`;
       },
     });
+
+    // Timeout after 60s — likely no real WebGPU support
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Load timeout — WebGPU may not be supported')), 60000)
+    );
+
+    engine = await Promise.race([loadPromise, timeout]);
 
     setLoadingVisible(false);
     progressBarContainer.classList.remove('active');
